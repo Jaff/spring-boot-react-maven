@@ -1,0 +1,20 @@
+name: Branch Naming
+
+on:
+  push:
+    branches-ignore:
+     - master
+    tags-ignore:
+     - '**'
+
+jobs:
+  version-fix:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: do pom update
+      uses: ./.github/scripts/pom-update.sh
+      with:
+        new_branch: ${{ github.ref }}
+      run: echo pom-update ${{ github.ref }} scirpt should run
